@@ -36,7 +36,7 @@ func main() {
 	// Create an EC2 service object in the "us-west-2" region
 	// Note that you can also configure your region globally by
 	// exporting the AWS_REGION environment variable
-	svc := sqs.New(session.New(), aws.NewConfig().WithRegion("us-west-2"))
+	svc := sqs.New(session.New(), aws.NewConfig().WithRegion("eu-west-1"))
 
 	err, sourceUrl := resolveQueueUrl(*sourceQueueName, svc)
 
@@ -54,7 +54,7 @@ func main() {
 		QueueUrl:            aws.String(sourceUrl), // Required
 		VisibilityTimeout:   aws.Int64(1),
 		WaitTimeSeconds:     aws.Int64(1),
-		MaxNumberOfMessages: aws.Int64(10),
+		MaxNumberOfMessages: aws.Int64(5),
 	}
 
 	for {
