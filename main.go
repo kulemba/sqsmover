@@ -29,6 +29,7 @@ func main() {
 	var (
 		sourceQueueName = flag.String("source", "", "Source queue name")
 		destQueueName   = flag.String("dest", "", "Destination queue name")
+		maxNumberOfMsgs = flag.Int64("maxnum", 5, "Number of messages per batch")
 	)
 
 	flag.Parse()
@@ -54,7 +55,7 @@ func main() {
 		QueueUrl:            aws.String(sourceUrl), // Required
 		VisibilityTimeout:   aws.Int64(1),
 		WaitTimeSeconds:     aws.Int64(1),
-		MaxNumberOfMessages: aws.Int64(5),
+		MaxNumberOfMessages: aws.Int64(*maxNumberOfMsgs),
 	}
 
 	for {
